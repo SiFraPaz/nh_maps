@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <title>NewHampshire Map – Zoom 7, 8, 9 und 10</title>
 
-<!-- Leaflet CSS -->
+<!-- Leaflet CSS (korrekt eingebunden) -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
 <style>
@@ -73,12 +73,12 @@
 <!-- Footer -->
 <div id="footer">
     Historische Karte © 
-    <a href="https://www.davidrumsey.com/luna/servlet/detail/RUMSEY~8~1~376948~90141681:Scarborough-s-Map-of-New-Hampshire-?mi=0&trs=607&qvq=w4s:/where%2FNew%2BHampshire;q:New%20Hampshire;lc:RUMSEY~8~1" target="_blank">
+    https://www.davidrumsey.com/luna/servlet/detail/RUMSEY~8~1~376948~90141681:Scarborough-s-Map-of-New-Hampshire-?mi=0&trs=607&qvq=w4s:/where%2FNew%2BHampshire;q:New%20Hampshire;lc:RUMSEY~8~1
         David Rumsey Map Collection, David Rumsey Map Center, Stanford Libraries
     </a>
 </div>
 
-<!-- Leaflet JS -->
+<!-- Leaflet JS (korrekt eingebunden) -->
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
@@ -127,7 +127,7 @@ L.tileLayer('tiles/8/{x}/{y}.png', {
 }).addTo(map);
 
 // =========================
-– // Tiles für Zoom 9
+// Tiles für Zoom 9
 // =========================
 L.tileLayer('tiles/9/{x}/{y}.png', {
     tileSize: 256,
