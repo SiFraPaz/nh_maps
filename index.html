@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <title>NewHampshire Map – Zoom 7, 8, 9 und 10</title>
 
-<!-- Leaflet CSS (korrekt eingebunden) -->
+<!-- Leaflet CSS -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
 <style>
@@ -25,7 +25,7 @@
         font-size: 14px;
     }
 
-    /* Eleganter Footer */
+    /* Eleganter Footer – standardmäßig unsichtbar */
     #footer {
         position: fixed;
         bottom: 0;
@@ -39,6 +39,8 @@
         text-align: center;
         box-shadow: 0 -2px 6px rgba(0,0,0,0.15);
         z-index: 9999;
+        opacity: 0;
+        pointer-events: none;
         transition: opacity 0.3s ease;
     }
 
@@ -72,13 +74,14 @@
 
 <!-- Footer -->
 <div id="footer">
-    Historische Karte © 
-    https://www.davidrumsey.com/luna/servlet/detail/RUMSEY~8~1~376948~90141681:Scarborough-s-Map-of-New-Hampshire-?mi=0&trs=607&qvq=w4s:/where%2FNew%2BHampshire;q:New%20Hampshire;lc:RUMSEY~8~1
-        David Rumsey Map Collection, David Rumsey Map Center, Stanford Libraries
+    Historische Karte: 
+    <a href="https://www.davidrumsey.com/luna/servlet/detail/RUMSEY~8~1~376948~90141681" target="_blank">
+        Scarborough’s Map of New Hampshire (1784)
     </a>
+    – © David Rumsey Map Collection, David Rumsey Map Center, Stanford Libraries
 </div>
 
-<!-- Leaflet JS (korrekt eingebunden) -->
+<!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
@@ -106,45 +109,11 @@ map.attributionControl.addAttribution(
     'Historische Karte © David Rumsey Map Collection, David Rumsey Map Center, Stanford Libraries'
 );
 
-// =========================
-// Tiles für Zoom 7
-// =========================
-L.tileLayer('tiles/7/{x}/{y}.png', {
-    tileSize: 256,
-    minZoom: 7,
-    maxZoom: 7,
-    attribution: '© Simon'
-}).addTo(map);
-
-// =========================
-// Tiles für Zoom 8
-// =========================
-L.tileLayer('tiles/8/{x}/{y}.png', {
-    tileSize: 256,
-    minZoom: 8,
-    maxZoom: 8,
-    attribution: '© Simon'
-}).addTo(map);
-
-// =========================
-// Tiles für Zoom 9
-// =========================
-L.tileLayer('tiles/9/{x}/{y}.png', {
-    tileSize: 256,
-    minZoom: 9,
-    maxZoom: 9,
-    attribution: '© Simon'
-}).addTo(map);
-
-// =========================
-// Tiles für Zoom 10
-// =========================
-L.tileLayer('tiles/10/{x}/{y}.png', {
-    tileSize: 256,
-    minZoom: 10,
-    maxZoom: 10,
-    attribution: '© Simon'
-}).addTo(map);
+// Tile-Layer
+L.tileLayer('tiles/7/{x}/{y}.png', { tileSize:256, minZoom:7, maxZoom:7, attribution:'© Simon' }).addTo(map);
+L.tileLayer('tiles/8/{x}/{y}.png', { tileSize:256, minZoom:8, maxZoom:8, attribution:'© Simon' }).addTo(map);
+L.tileLayer('tiles/9/{x}/{y}.png', { tileSize:256, minZoom:9, maxZoom:9, attribution:'© Simon' }).addTo(map);
+L.tileLayer('tiles/10/{x}/{y}.png', { tileSize:256, minZoom:10, maxZoom:10, attribution:'© Simon' }).addTo(map);
 
 // =========================================================
 // Historische Rumsey-Karte
@@ -161,12 +130,19 @@ var rumseyOverlay = L.imageOverlay(
     }
 );
 
+// Footer-Element referenzieren
+let footer = document.getElementById("footer");
+
 // === Checkbox: Overlay ein/aus ===
 document.getElementById("rumseyToggle").addEventListener("change", function(e){
     if (e.target.checked) {
         rumseyOverlay.addTo(map);
+        footer.style.opacity = "1";
+        footer.style.pointerEvents = "auto";
     } else {
         map.removeLayer(rumseyOverlay);
+        footer.style.opacity = "0";
+        footer.style.pointerEvents = "none";
     }
 });
 
