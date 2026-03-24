@@ -1,45 +1,42 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="utf-8" />
-<title>NH Map – Zoom 9 und 10</title>
+    <meta charset="utf-8" />
+    <title>NH Map – Zoom 9 und 10</title>
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-
-<style>
-    body { margin: 0; padding: 0; }
-    #map { width: 100vw; height: 100vh; }
-</style>
+    <!-- Leaflet CSS -->
+    <link 
+      rel="stylesheet" 
+      href="https://unpkg.com/leaflet/dist/leaflet.css"
+    />
+    
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { width: 100vw; height: 100vh; }
+    </style>
 </head>
-
 <body>
 
 <div id="map"></div>
 
+<!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
-    // Boundaries for New Hampshire
-    var bounds = L.latLngBounds(
-        [42.5, -72.5],
-        [44.5, -70.5]
-    );
-
+    // Karte für Zoom 9–10
     var map = L.map('map', {
         minZoom: 9,
-        maxZoom: 10,
-        maxBounds: bounds,
-        maxBoundsViscosity: 1.0
+        maxZoom: 10
     }).setView([44.0, -71.0], 9);
 
+    // Tile-Layer (nur deine 11er Tiles skaliert)
     L.tileLayer('tiles/11/{x}/{y}.png', {
         tileSize: 256,
         minZoom: 9,
         maxZoom: 10,
-        attribution: '© Simon I.'
+        attribution: '© Simon D DFr'
     }).addTo(map);
 </script>
 
 </body>
 </html>
-``
