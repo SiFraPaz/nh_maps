@@ -1,39 +1,37 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="utf-8" />
-    <title>NH Map – begrenzt</title>
+<meta charset="utf-8" />
+<title>NH Map – Zoom 9 und 10</title>
 
-    https://unpkg.com/leaflet/dist/leaflet.css
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
-    <style>
-        body { margin: 0; padding: 0; }
-        #map { width: 100vw; height: 100vh; }
-    </style>
+<style>
+    body { margin: 0; padding: 0; }
+    #map { width: 100vw; height: 100vh; }
+</style>
 </head>
+
 <body>
 
 <div id="map"></div>
 
-https://unpkg.com/leaflet/dist/leaflet.js
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
-    // GRENZEN des Kartenausschnitts
+    // Boundaries for New Hampshire
     var bounds = L.latLngBounds(
-        [42.5, -72.5],   // südwestliche Ecke
-        [44.5, -70.5]    // nordöstliche Ecke
+        [42.5, -72.5],
+        [44.5, -70.5]
     );
 
-    // Karte initialisieren – nur Zoom 9 bis 10
     var map = L.map('map', {
         minZoom: 9,
         maxZoom: 10,
-        maxBounds: bounds,        // <- WICHTIG!
-        maxBoundsViscosity: 1.0,  // stoppt das Verschieben komplett
-        zoomControl: true
+        maxBounds: bounds,
+        maxBoundsViscosity: 1.0
     }).setView([44.0, -71.0], 9);
 
-    // TILE-LAYER – wir nutzen nur /11/
     L.tileLayer('tiles/11/{x}/{y}.png', {
         tileSize: 256,
         minZoom: 9,
@@ -44,3 +42,4 @@ https://unpkg.com/leaflet/dist/leaflet.js
 
 </body>
 </html>
+``
