@@ -2,62 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="utf-8" />
-    <title>New Hampshire Island Map</title>
-
-    <link 
-      rel="stylesheet" 
-      href="https://unpkg.com/leaflet/dist/leaflet.css"
-    />
-
-    <style>
-        body { margin: 0; padding: 0; }
-        #map { width: 100vw; height: 100vh; }
-    </style>
-</head>
-<body>
-
-<div id="map"></div>
-
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-<script>
-    // Karte initialisieren
-    var map = L.map('map', {
-        minZoom: 9,
-        maxZoom: 11
-    }).setView([44.0, -71.0], 10);
-
-    // LISTE deiner vorhandenen Tile-Ordner (alle explizit)
-    var tileFolders = [
-        "9",
-        "10",
-        "611",
-        "612",
-        "613",
-        "614",
-        "615",
-        "616",
-        "617",
-        "618"
-    ];
-
-    // Alle Layer nacheinander probieren: Leaflet lädt das erste Tile, das existiert
-    tileFolders.forEach(function(folder) {
-        L.tileLayer('tiles/' + folder + '/{x}/{y}.png', {
-            minZoom: 9,
-            maxZoom: 11,
-            errorTileUrl: "",   // verhindert rote Fehlerkacheln
-            attribution: '© Simon'
-        }).addTo(map);
-    });
-</script>
-
-</body>
-</html><!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="utf-8" />
-    <title>New Hampshire Island Map</title>
+    <title>NH Map – Zoom 9 bis 11</title>
 
     <!-- Leaflet CSS -->
     <link 
@@ -75,22 +20,22 @@
 <div id="map"></div>
 
 <!-- Leaflet JS -->
-<script 
-  src="https://unpkg.com/leaflet/dist/leaflet.js">
-</script>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
     // Karte initialisieren
     var map = L.map('map', {
         minZoom: 9,
-        maxZoom: 11
-    }).setView([44.0, -71.0], 10);  // Mittelpunkt kannst du anpassen
+        maxZoom: 11,
+        zoomControl: true
+    }).setView([44.0, -71.0], 10);
 
-    // Tiles laden
-    L.tileLayer('tiles/{z}/{x}/{y}.png', {
+    // EIN TileLayer für alle Zoomstufen, aber gespeist aus deinem /11/ Ordner
+    L.tileLayer('tiles/11/{x}/{y}.png', {
         tileSize: 256,
-        tms: false,   // wichtig: QGIS exportiert normalerweise kein TMS
-        attribution: '© Simon'
+        minZoom: 9,
+        maxZoom: 11,
+        attribution: '© Simon Franzen'
     }).addTo(map);
 </script>
 
