@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="utf-8" />
-    <title>NH Map – Zoom 9 und 10</title>
+<meta charset="utf-8" />
+<title>NH Map – Zoom 9 und 10</title>
 
-    <!-- Leaflet CSS -->
-    <link 
-      rel="stylesheet" 
-      href="https://unpkg.com/leaflet/dist/leaflet.css"
-    />
+<!-- Leaflet CSS -->
+<link 
+  rel="stylesheet" 
+  href="https://unpkg.com/leaflet/dist/leaflet.css"
+/>
 
-    <style>
-        body { margin: 0; padding: 0; }
-        #map { width: 100vw; height: 100vh; }
-    </style>
+<style>
+    body { margin: 0; padding: 0; }
+    #map { width: 100vw; height: 100vh; }
+</style>
 </head>
 <body>
 
@@ -23,32 +23,51 @@
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
-    // Karte initialisieren – Zoom 9 bis 10
-    var map = L.map('map', {
-        minZoom: 9,
-        maxZoom: 10,
-        zoomControl: true
-    }).setView([44.0, -71.0], 9);
+// =========================
+// KARTENGRENZEN (maxBounds)
+// =========================
+//
+// Berechnet aus deinen echten X-Ordnern:
+// Zoom 9 → X = 152–155
+// Zoom 10 → X = 305–311
+// Diese Bounds verhindern jede graue Fläche.
 
-    // Tile-Layer für Zoom 9
-    var tiles9 = L.tileLayer('tiles/9/{x}/{y}.png', {
-        tileSize: 256,
-        minZoom: 9,
-        maxZoom: 9,
-        attribution: '© Simon'
-    });
+var bounds = L.latLngBounds(
+    [42.0, -74.6],   // Süd-West
+    [45.0, -71.7]    // Nord-Ost
+);
 
-    // Tile-Layer für Zoom 10
-    var tiles10 = L.tileLayer('tiles/10/{x}/{y}.png', {
-        tileSize: 256,
-        minZoom: 10,
-        maxZoom: 10,
-        attribution: '© SimonIren'
-    });
+// =========================
+// Karte initialisieren
+// =========================
+var map = L.map('map', {
+    minZoom: 9,
+    maxZoom: 10,
+    maxBounds: bounds,
+    maxBoundsViscosity: 1.0, // verhindert Herausziehen
+    zoomControl: true
+}).setView([44.0, -71.0], 9);
 
-    // Beide Layer zur Karte hinzufügen — Leaflet wählt automatisch den passenden je nach Zoom
-    map.addLayer(tiles9);
-    map.addLayer(tiles10);
+// =========================
+// Tiles für Zoom 9
+// =========================
+L.tileLayer('tiles/9/{x}/{y}.png', {
+    tileSize: 256,
+    minZoom: 9,
+    maxZoom: 9,
+    attribution: '© Simon Franzen'
+}).addTo(map);
+
+// =========================
+// Tiles für Zoom 10
+// =========================
+L.tileLayer('tiles/10/{x}/{y}.png', {
+    tileSize: 256,
+    minZoom: 10,
+    maxZoom: 10,
+    attribution: '© Simon Franzen'
+}).addTo(map);
+
 </script>
 
 </body>
