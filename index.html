@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8" />
-<title>NH Map – Zoom 9 und 10</title>
+<title>NH Map – Zoom 7, 8 9 und 10</title>
 
 <!-- Leaflet CSS -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
@@ -38,6 +38,28 @@ var map = L.map('map', {
     maxBoundsViscosity: 1.0,
     zoomControl: true
 }).setView([44.0, -71.3], 9);
+
+    // =========================
+// Tiles für Zoom 7
+// =========================
+L.tileLayer('tiles/7/{x}/{y}.png', {
+    tileSize: 256,
+    minZoom: 7,
+    maxZoom: 7,
+    attribution: '© Simon'
+}).addTo(map);
+
+
+    // =========================
+// Tiles für Zoom 8
+// =========================
+L.tileLayer('tiles/8/{x}/{y}.png', {
+    tileSize: 256,
+    minZoom: 8,
+    maxZoom: 8,
+    attribution: '© Simon'
+}).addTo(map);
+
 
 // =========================
 // Tiles für Zoom 9
