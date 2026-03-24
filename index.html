@@ -5,10 +5,7 @@
 <title>NH Map – Zoom 9 und 10</title>
 
 <!-- Leaflet CSS -->
-<link 
-  rel="stylesheet" 
-  href="https://unpkg.com/leaflet/dist/leaflet.css"
-/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
 
 <style>
     body { margin: 0; padding: 0; }
@@ -24,17 +21,11 @@
 
 <script>
 // =========================
-// KARTENGRENZEN (maxBounds)
+// Exakte NH-Grenzen
 // =========================
-//
-// Berechnet aus deinen echten X-Ordnern:
-// Zoom 9 → X = 152–155
-// Zoom 10 → X = 305–311
-// Diese Bounds verhindern jede graue Fläche.
-
 var bounds = L.latLngBounds(
-    [42.0, -74.6],   // Süd-West
-    [45.0, -71.7]    // Nord-Ost
+    [42.70, -72.56],   // Süd-West
+    [45.31, -70.61]    // Nord-Ost
 );
 
 // =========================
@@ -44,28 +35,25 @@ var map = L.map('map', {
     minZoom: 9,
     maxZoom: 10,
     maxBounds: bounds,
-    maxBoundsViscosity: 1.0, // verhindert Herausziehen
+    maxBoundsViscosity: 1.0,  // verhindert Herausziehen
     zoomControl: true
-}).setView([44.0, -71.0], 9);
+}).setView([44.0, -71.3], 9);
 
 // =========================
-// Tiles für Zoom 9
+// Tiles für Zoom 9 und 10
 // =========================
 L.tileLayer('tiles/9/{x}/{y}.png', {
     tileSize: 256,
     minZoom: 9,
     maxZoom: 9,
-    attribution: '© Simon Franzen'
+    attribution: '© Simon D. Franzen (2026)'
 }).addTo(map);
 
-// =========================
-// Tiles für Zoom 10
-// =========================
 L.tileLayer('tiles/10/{x}/{y}.png', {
     tileSize: 256,
     minZoom: 10,
     maxZoom: 10,
-    attribution: '© Simon Franzen'
+    attribution: '© Simon D. Franzen (2026)'
 }).addTo(map);
 
 </script>
