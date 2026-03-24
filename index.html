@@ -2,14 +2,14 @@
 <html lang="de">
 <head>
     <meta charset="utf-8" />
-    <title>NewH Map – Zoom 9 und 10</title>
+    <title>NH Map – Zoom 9 und 10</title>
 
     <!-- Leaflet CSS -->
     <link 
       rel="stylesheet" 
       href="https://unpkg.com/leaflet/dist/leaflet.css"
     />
-    
+
     <style>
         body { margin: 0; padding: 0; }
         #map { width: 100vw; height: 100vh; }
@@ -23,19 +23,32 @@
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
-    // Karte für Zoom 9–10
+    // Karte initialisieren – Zoom 9 bis 10
     var map = L.map('map', {
         minZoom: 9,
-        maxZoom: 10
+        maxZoom: 10,
+        zoomControl: true
     }).setView([44.0, -71.0], 9);
 
-    // Tile-Layer (nur deine 11er Tiles skaliert)
-    L.tileLayer('tiles/{x}/{y}.png', {
+    // Tile-Layer für Zoom 9
+    var tiles9 = L.tileLayer('tiles/9/{x}/{y}.png', {
         tileSize: 256,
         minZoom: 9,
+        maxZoom: 9,
+        attribution: '© Simon'
+    });
+
+    // Tile-Layer für Zoom 10
+    var tiles10 = L.tileLayer('tiles/10/{x}/{y}.png', {
+        tileSize: 256,
+        minZoom: 10,
         maxZoom: 10,
-        attribution: '© Simon D DFr'
-    }).addTo(map);
+        attribution: '© SimonIren'
+    });
+
+    // Beide Layer zur Karte hinzufügen — Leaflet wählt automatisch den passenden je nach Zoom
+    map.addLayer(tiles9);
+    map.addLayer(tiles10);
 </script>
 
 </body>
