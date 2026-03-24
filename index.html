@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <title>New Hampshire Island Map</title>
+
+    <!-- Leaflet CSS -->
+    <link 
+      rel="stylesheet" 
+      href="https://unpkg.com/leaflet/dist/leaflet.css"
+    />
+
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { width: 100vw; height: 100vh; }
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<!-- Leaflet JS -->
+<script 
+  src="https://unpkg.com/leaflet/dist/leaflet.js">
+</script>
+
+<script>
+    // Karte initialisieren
+    var map = L.map('map', {
+        minZoom: 9,
+        maxZoom: 11
+    }).setView([44.0, -71.0], 10);  // Mittelpunkt kannst du anpassen
+
+    // Tiles laden
+    L.tileLayer('tiles/{z}/{x}/{y}.png', {
+        tileSize: 256,
+        tms: false,   // wichtig: QGIS exportiert normalerweise kein TMS
+        attribution: '© Simon'
+    }).addTo(map);
+</script>
+
+</body>
+</html>
