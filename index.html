@@ -21,6 +21,35 @@
         padding:10px;
         border-radius:6px;
         box-shadow:0 0 5px rgba(0,0,0,0.3);
+        font-family: sans-serif;
+        font-size: 14px;
+    }
+
+    /* Eleganter Footer */
+    #footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(4px);
+        font-family: sans-serif;
+        font-size: 14px;
+        padding: 6px 12px;
+        text-align: center;
+        box-shadow: 0 -2px 6px rgba(0,0,0,0.15);
+        z-index: 9999;
+        transition: opacity 0.3s ease;
+    }
+
+    #footer a {
+        color: #004a9f;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    #footer a:hover {
+        text-decoration: underline;
     }
 </style>
 </head>
@@ -39,6 +68,14 @@
 
     Transparenz:
     <input type="range" id="rumseyOpacity" min="0" max="1" step="0.05" value="0.6">
+</div>
+
+<!-- Footer -->
+<div id="footer">
+    Historische Karte © 
+    <a href="https://www.davidrumsey.com/luna/servlet/detail/RUMSEY~8~1~376948~90141681:Scarborough-s-Map-of-New-Hampshire-?mi=0&trs=607&qvq=w4s:/where%2FNew%2BHampshire;q:New%20Hampshire;lc:RUMSEY~8~1" target="_blank">
+        David Rumsey Map Collection, David Rumsey Map Center, Stanford Libraries
+    </a>
 </div>
 
 <!-- Leaflet JS -->
@@ -64,6 +101,11 @@ var map = L.map('map', {
     zoomControl: true
 }).setView([44.0, -71.3], 9);
 
+// Attribution gemäß Rumsey-Lizenzbedingungen
+map.attributionControl.addAttribution(
+    'Historische Karte © David Rumsey Map Collection, David Rumsey Map Center, Stanford Libraries'
+);
+
 // =========================
 // Tiles für Zoom 7
 // =========================
@@ -85,7 +127,7 @@ L.tileLayer('tiles/8/{x}/{y}.png', {
 }).addTo(map);
 
 // =========================
-// Tiles für Zoom 9
+– // Tiles für Zoom 9
 // =========================
 L.tileLayer('tiles/9/{x}/{y}.png', {
     tileSize: 256,
@@ -105,22 +147,18 @@ L.tileLayer('tiles/10/{x}/{y}.png', {
 }).addTo(map);
 
 // =========================================================
-// Historische Karte als ImageOverlay (NICHT georeferenziert)
+// Historische Rumsey-Karte
 // =========================================================
-//
-// Bildpfad:
-// https://github.com/SiFraPaz/nh_maps/blob/main/overlays/3251002.jpg
-//
-// Wir platzieren es grob über New Hampshire —
-// du kannst die vier Koordinaten später anpassen.
-//
 var rumseyOverlay = L.imageOverlay(
     'overlays/3251002.jpg',
     [
         [46.0, -74.0],   // Nord-West
         [42.0, -69.3]    // Süd-Ost
     ],
-    { opacity: 0.6 }
+    { 
+        opacity: 0.6,
+        attribution: 'Historische Karte © David Rumsey Map Collection, David Rumsey Map Center, Stanford Libraries'
+    }
 );
 
 // === Checkbox: Overlay ein/aus ===
