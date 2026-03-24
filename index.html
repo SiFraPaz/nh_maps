@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="utf-8" />
-    <title>NH Map – Zoom 9 und 10</title>
+    <title>NewH Map – Zoom 9 und 10</title>
 
     <!-- Leaflet CSS -->
     <link 
@@ -30,7 +30,7 @@
     }).setView([44.0, -71.0], 9);
 
     // Tile-Layer (nur deine 11er Tiles skaliert)
-    L.tileLayer('tiles/11/{x}/{y}.png', {
+    L.tileLayer('tiles/{x}/{y}.png', {
         tileSize: 256,
         minZoom: 9,
         maxZoom: 10,
